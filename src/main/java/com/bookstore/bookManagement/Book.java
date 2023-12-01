@@ -1,4 +1,4 @@
-package bookManagement;
+package com.bookstore.bookManagement;
 
 public class Book {
     private int id;
@@ -7,8 +7,15 @@ public class Book {
     private Double price;
     private int quantity;
 
-
     public Book() {
+    }
+
+    public Book(String title, String author, Double price, int quantity) {
+        this.id = 0;
+        this.title = title;
+        this.author = author;
+        this.price = price;
+        this.quantity = quantity;
     }
 
     public int getId() {
@@ -49,5 +56,16 @@ public class Book {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", price=" + price +
+                ", quantity=" + quantity +
+                '}';
     }
 }
