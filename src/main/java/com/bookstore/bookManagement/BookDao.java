@@ -37,10 +37,10 @@ public class BookDao {
         try (Connection connection = DBConnection.getConnection()) {
             String sql = "SELECT * FROM Books WHERE id = ?;";
 
-            try(PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                 preparedStatement.setInt(1, id);
 
-                try(ResultSet result = preparedStatement.executeQuery()) {
+                try (ResultSet result = preparedStatement.executeQuery()) {
                     if (result.next()) {
                         Book book = new Book();
                         book.setId(result.getInt("id"));
@@ -51,8 +51,7 @@ public class BookDao {
 
                         System.out.println(book);
                         return book;
-                    }
-                    else {
+                    } else {
                         throw new Exception("Invalid id");
                     }
                 }
@@ -63,9 +62,23 @@ public class BookDao {
         return null;
     }
 
-    public void addBook(Book book) {
-        //TODO: add book to DB
-        //TODO: maybe return boolean true if successfully
+    public int addBook(Book book) {
+        try (Connection connection = DBConnection.getConnection()) {
+            String sql = "INSERT INTO Books (title, author, price, quantity) VALUES(?, ?, ?, ?)";
+
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                preparedStatement.setString(1, book.getTitle());
+                preparedStatement.setString(2, book.getAuthor());
+                preparedStatement.setDouble(3, book.getPrice());
+                preparedStatement.setInt(4, book.getQuantity());
+
+                int addedRecords = preparedStatement.executeUpdate();
+                return addedRecords;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
     public void updateBook(int id, Book book) {

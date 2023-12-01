@@ -10,6 +10,14 @@ public class Book {
     public Book() {
     }
 
+    public Book(String title, String author, Double price, int quantity) {
+        this.id = 0;
+        this.title = title;
+        this.author = author;
+        this.price = price;
+        this.quantity = quantity;
+    }
+
     public int getId() {
         return id;
     }
