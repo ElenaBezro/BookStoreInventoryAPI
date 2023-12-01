@@ -81,14 +81,41 @@ public class BookDao {
         return 0;
     }
 
-    public void updateBook(int id, Book book) {
-        //TODO: update book in DB
-        //TODO: maybe return boolean true if successfully or throw error
+    public int updateBook(int id, Book book) {
+        try (Connection connection = DBConnection.getConnection()) {
+            String sql = "UPDATE Books SET title = ?, author = ?, price = ?, quantity = ? WHERE id = ?";
+
+
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                preparedStatement.setString(1, book.getTitle());
+                preparedStatement.setString(2, book.getAuthor());
+                preparedStatement.setDouble(3, book.getPrice());
+                preparedStatement.setInt(4, book.getQuantity());
+                preparedStatement.setInt(5, id);
+
+                int affectedRecords = preparedStatement.executeUpdate();
+                return affectedRecords;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
-    public void deleteBook(int id) {
-        //TODO: delete book in DB
-        //TODO: maybe return boolean true if successfully or throw error
+    public int deleteBook(int id) {
+        try (Connection connection = DBConnection.getConnection()) {
+            String sql = "DELETE FROM Books WHERE id = ?";
+
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                preparedStatement.setInt(1, id);
+
+                int addedRecords = preparedStatement.executeUpdate();
+                return addedRecords;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
 }
