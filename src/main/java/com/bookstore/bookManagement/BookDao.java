@@ -62,7 +62,7 @@ public class BookDao {
         return null;
     }
 
-    public int addBook(Book book) {
+    public boolean addBook(Book book) {
         try (Connection connection = DBConnection.getConnection()) {
             String sql = "INSERT INTO Books (title, author, price, quantity) VALUES(?, ?, ?, ?)";
 
@@ -73,18 +73,17 @@ public class BookDao {
                 preparedStatement.setInt(4, book.getQuantity());
 
                 int addedRecords = preparedStatement.executeUpdate();
-                return addedRecords;
+                return addedRecords > 0;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return 0;
+        return false;
     }
 
-    public int updateBook(int id, Book book) {
+    public boolean updateBook(int id, Book book) {
         try (Connection connection = DBConnection.getConnection()) {
             String sql = "UPDATE Books SET title = ?, author = ?, price = ?, quantity = ? WHERE id = ?";
-
 
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                 preparedStatement.setString(1, book.getTitle());
@@ -94,15 +93,15 @@ public class BookDao {
                 preparedStatement.setInt(5, id);
 
                 int affectedRecords = preparedStatement.executeUpdate();
-                return affectedRecords;
+                return affectedRecords > 0;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return 0;
+        return false;
     }
 
-    public int deleteBook(int id) {
+    public boolean deleteBook(int id) throws SQLException {
         try (Connection connection = DBConnection.getConnection()) {
             String sql = "DELETE FROM Books WHERE id = ?";
 
@@ -110,12 +109,11 @@ public class BookDao {
                 preparedStatement.setInt(1, id);
 
                 int addedRecords = preparedStatement.executeUpdate();
-                return addedRecords;
+                return addedRecords > 0;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new SQLException("Error occurred during the delete operation");
         }
-        return 0;
     }
 
 }
