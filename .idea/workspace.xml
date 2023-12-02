@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4dd3ae1b-0e81-403e-a720-b5622f8e199d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bookstore/bookManagement/BookDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bookstore/bookManagement/BookDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bookstore/bookManagement/BookResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bookstore/bookManagement/BookResource.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bookstore/authorManagement/Author.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +36,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "feature/set__up__jersey__REST__API__server",
+    "git-widget-placeholder": "feature/create__and__integrate__author__entity",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0"
