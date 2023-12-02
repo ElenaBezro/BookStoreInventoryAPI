@@ -2,10 +2,13 @@ package com.bookstore.bookManagement;
 
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.ext.Provider;
 
+import java.sql.SQLException;
 import java.util.List;
 
-@Path("/book")
+@Path("/books")
 public class BookResource {
     public static BookDao bookDao = new BookDao();
 
@@ -30,25 +33,55 @@ public class BookResource {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public void addBook(Book book) {
-        //TODO: check if bookDao.addBook(book) return 1 or 0? Response if successfully
-        bookDao.addBook(book);
+    public Response addBook(Book book) {
+        boolean isAdded = bookDao.addBook(book);
+        if(isAdded) {
+            return Response.status(Response.Status.CREATED)
+                    .build();
+        }
+        else {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .build();
+        }
     }
 
     @Path("/{id}")
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    public void updateBook(@PathParam("id") int id, Book updatedBook) {
-        //TODO: check if bookDao.updateBook(id,book) return 1 or 0? Response if successfully
-        bookDao.updateBook(id, updatedBook);
+    public Response updateBook(@PathParam("id") int id, Book updatedBook) {
+        boolean isUpdated = bookDao.updateBook(id, updatedBook);
+        if(isUpdated) {
+            return Response.status(Response.Status.CREATED)
+                    .build();
+        }
+        else {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .build();
+        }
     }
 
     @Path("/{id}")
     @DELETE
     @Consumes(MediaType.APPLICATION_JSON)
-    public void deleteBook(@PathParam("id") int id) {
-        //TODO: check if bookDao.deleteBook(id) return 1 or 0? Response if successfully
-        bookDao.deleteBook(id);
+    public Response deleteBook(@PathParam("id") int id) {
+
+        boolean isDeleted = false;
+        try {
+            isDeleted = bookDao.deleteBook(id);
+        } catch (SQLException e) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .build();
+        }
+        if(isDeleted) {
+            return Response.status(Response.Status.CREATED)
+                    .entity("Deleted")
+                    .build();
+        }
+        else {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity("Bad request")
+                    .build();
+        }
     }
 
 }

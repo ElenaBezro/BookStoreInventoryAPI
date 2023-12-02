@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="4dd3ae1b-0e81-403e-a720-b5622f8e199d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bookstore/bookManagement/BookDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bookstore/bookManagement/BookDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/bookstore/bookManagement/BookResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bookstore/bookManagement/BookResource.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -61,6 +62,11 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/bookstore/DBConnection.java</url>
           <line>14</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/bookstore/bookManagement/BookDao.java</url>
+          <line>110</line>
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
