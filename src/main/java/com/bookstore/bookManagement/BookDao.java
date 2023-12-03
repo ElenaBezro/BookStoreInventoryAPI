@@ -3,6 +3,7 @@ package com.bookstore.bookManagement;
 import com.bookstore.DBConnection;
 import com.bookstore.authorManagement.Author;
 import com.bookstore.authorManagement.AuthorDao;
+import jakarta.ws.rs.QueryParam;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -39,6 +40,76 @@ public class BookDao {
             e.printStackTrace();
         }
         return new ArrayList<>();
+    }
+
+    public List<GetBookDTO> searchBooks(String authorName, Double maxPrice) {
+        List<GetBookDTO> books = new ArrayList<>();
+
+        try (Connection connection = DBConnection.getConnection()) {
+            String sql;
+            if (authorName==null && maxPrice==null) {
+                return getAllBooks();
+
+            } else if (authorName==null) {
+                sql = "SELECT id, a.author_id, name AS author_name, email, title, price, quantity" +
+                        " FROM Books b JOIN Authors a" +
+                        " ON b.author_id = a.author_id" +
+                        " WHERE price <= ?";
+
+                try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                    preparedStatement.setDouble(1, maxPrice);
+                    executeAndAddBooks(books, preparedStatement);
+                }
+            } else if (maxPrice==null) {
+                sql = "SELECT id, a.author_id, name AS author_name, email, title, price, quantity" +
+                        " FROM Books b JOIN Authors a" +
+                        " ON b.author_id = a.author_id" +
+                        " WHERE a.name LIKE ?;";
+
+                try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                    preparedStatement.setString(1, "%" + authorName + "%");
+                    executeAndAddBooks(books, preparedStatement);
+                }
+            }
+            else {
+                System.out.println(authorName);
+                System.out.println(maxPrice);
+                sql = "SELECT id, a.author_id, name AS author_name, email, title, price, quantity" +
+                        " FROM Books b JOIN Authors a" +
+                        " ON b.author_id = a.author_id" +
+                        " WHERE price <= ? " +
+                        "AND a.name LIKE ?;";
+
+                try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                    preparedStatement.setDouble(1, maxPrice);
+                    preparedStatement.setString(2, "%" + authorName + "%");
+                    executeAndAddBooks(books, preparedStatement);
+                }
+            }
+            System.out.println(books);
+            return books;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return new ArrayList<>();
+    }
+
+    private void executeAndAddBooks(List<GetBookDTO> books, PreparedStatement preparedStatement) throws SQLException {
+        try (ResultSet result = preparedStatement.executeQuery()) {
+            while (result.next()) {
+                GetBookDTO book = new GetBookDTO();
+                Author author = new Author();
+                book.setId(result.getInt("id"));
+                author.setId(result.getInt("author_id"));
+                author.setName(result.getString("author_name"));
+                author.setEmail(result.getString("email"));
+                book.setAuthor(author);
+                book.setTitle(result.getString("title"));
+                book.setPrice(result.getDouble("price"));
+                book.setQuantity(result.getInt("quantity"));
+                books.add(book);
+            }
+        }
     }
 
     public GetBookDTO getBookById(int id) throws Exception {

@@ -5,10 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4dd3ae1b-0e81-403e-a720-b5622f8e199d" name="Changes" comment="change field author to author_id in Book class">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bookstore/bookManagement/BookDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bookstore/bookManagement/GetBookDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bookstore/bookManagement/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bookstore/bookManagement/Book.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/bookstore/bookManagement/BookDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bookstore/bookManagement/BookDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/bookstore/bookManagement/BookResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bookstore/bookManagement/BookResource.java" afterDir="false" />
     </list>
@@ -41,7 +38,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "feature/join__Books__queries__with__Authors__table",
+    "git-widget-placeholder": "feature/use__query__parameters__to__filter__books",
     "last_opened_file_path": "/Users/elenabezrodnova/IdeaProjects/BookStoreInventoryAPI/src/main/java/com/bookstore/authorManagement",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
@@ -73,6 +70,17 @@
     <option name="localTasksCounter" value="2" />
     <servers />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="change field author to author_id in Book class" />
     <option name="LAST_COMMIT_MESSAGE" value="change field author to author_id in Book class" />
@@ -87,8 +95,18 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/bookstore/bookManagement/BookDao.java</url>
-          <line>116</line>
+          <line>187</line>
           <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/bookstore/bookManagement/BookDao.java</url>
+          <line>53</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/bookstore/bookManagement/BookDao.java</url>
+          <line>52</line>
+          <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

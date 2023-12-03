@@ -17,6 +17,13 @@ public class BookResource {
         return bookDao.getAllBooks();
     }
 
+    @Path("/search")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<GetBookDTO> searchBooks(@QueryParam("author") String author, @QueryParam("maxPrice") Double maxPrice) {
+        return bookDao.searchBooks(author, maxPrice);
+    }
+
     @Path("/{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
