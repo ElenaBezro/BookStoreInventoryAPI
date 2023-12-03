@@ -1,23 +1,31 @@
 package com.bookstore.bookManagement;
 
 import com.bookstore.DBConnection;
+import com.bookstore.authorManagement.Author;
+import com.bookstore.authorManagement.AuthorDao;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class BookDao {
-    public List<Book> getAllBooks() {
-        List<Book> books = new ArrayList<>();
+    public List<GetBookDTO> getAllBooks() {
+        List<GetBookDTO> books = new ArrayList<>();
 
         try (Connection connection = DBConnection.getConnection()) {
-            String sql = "SELECT * FROM Books;";
+            String sql = "SELECT id, a.author_id, name AS author_name, email, title, price, quantity" +
+                    " FROM Books b JOIN Authors a" +
+                    " ON b.author_id = a.author_id;";
             try (Statement statement = connection.createStatement()) {
                 try (ResultSet result = statement.executeQuery(sql)) {
                     while (result.next()) {
-                        Book book = new Book();
+                        GetBookDTO book = new GetBookDTO();
+                        Author author = new Author();
                         book.setId(result.getInt("id"));
-                        book.setAuthorId(result.getInt("author_id"));
+                        author.setId(result.getInt("author_id"));
+                        author.setName(result.getString("author_name"));
+                        author.setEmail(result.getString("email"));
+                        book.setAuthor(author);
                         book.setTitle(result.getString("title"));
                         book.setPrice(result.getDouble("price"));
                         book.setQuantity(result.getInt("quantity"));
@@ -33,7 +41,7 @@ public class BookDao {
         return new ArrayList<>();
     }
 
-    public Book getBookById(int id) throws Exception {
+    public GetBookDTO getBookById(int id) throws Exception {
         try (Connection connection = DBConnection.getConnection()) {
             String sql = "SELECT * FROM Books WHERE id = ?;";
 
@@ -42,17 +50,15 @@ public class BookDao {
 
                 try (ResultSet result = preparedStatement.executeQuery()) {
                     if (result.next()) {
-                        Book book = new Book();
+                        GetBookDTO book = new GetBookDTO();
                         book.setId(result.getInt("id"));
-                        book.setAuthorId(result.getInt("author_id"));
+                        book.setAuthor(new AuthorDao().getAuthorById(result.getInt("author_id")));
                         book.setTitle(result.getString("title"));
                         book.setPrice(result.getDouble("price"));
                         book.setQuantity(result.getInt("quantity"));
 
                         System.out.println(book);
                         return book;
-                    } else {
-                        throw new Exception("Invalid id");
                     }
                 }
             }
@@ -62,7 +68,7 @@ public class BookDao {
         return null;
     }
 
-    public boolean addBook(Book book) {
+    public boolean addBook(BookDTO book) {
         try (Connection connection = DBConnection.getConnection()) {
             String sql = "INSERT INTO Books (author_id, title, price, quantity) VALUES(?, ?, ?, ?)";
 
@@ -81,9 +87,9 @@ public class BookDao {
         return false;
     }
 
-    public boolean updateBook(int id, Book book) {
+    public boolean updateBook(int id, BookDTO book) {
         try (Connection connection = DBConnection.getConnection()) {
-            String sql = "UPDATE Books SET  author_id = ?, title = ?, price = ?, quantity = ? WHERE id = ?";
+            String sql = "UPDATE Books SET author_id = ?, title = ?, price = ?, quantity = ? WHERE id = ?";
 
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                 preparedStatement.setInt(1, book.getAuthorId());

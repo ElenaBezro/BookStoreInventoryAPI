@@ -13,32 +13,41 @@ public class BookResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Book> getAllBooks() {
+    public List<GetBookDTO> getAllBooks() {
         return bookDao.getAllBooks();
     }
 
     @Path("/{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Book getBookById(@PathParam("id") int id) {
+    public Response getBookById(@PathParam("id") int id) {
         try {
-            //TODO return status OK.
-            return bookDao.getBookById(id);
+            GetBookDTO book = bookDao.getBookById(id);
+            if (book != null) {
+                return Response.status(Response.Status.CREATED)
+                        .entity(book)
+                        .build();
+            }
+            else {
+                return Response.status(Response.Status.BAD_REQUEST)
+                        .entity("Book with ID " + id + " not found")
+                        .build();
+            }
         } catch (Exception e) {
-            //TODO return status BAD_REQUEST.
-            throw new RuntimeException(e);
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity("Error retrieving book")
+                    .build();
         }
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response addBook(Book book) {
+    public Response addBook(BookDTO book) {
         boolean isAdded = bookDao.addBook(book);
-        if(isAdded) {
+        if (isAdded) {
             return Response.status(Response.Status.CREATED)
                     .build();
-        }
-        else {
+        } else {
             return Response.status(Response.Status.BAD_REQUEST)
                     .build();
         }
@@ -47,13 +56,12 @@ public class BookResource {
     @Path("/{id}")
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response updateBook(@PathParam("id") int id, Book updatedBook) {
+    public Response updateBook(@PathParam("id") int id, BookDTO updatedBook) {
         boolean isUpdated = bookDao.updateBook(id, updatedBook);
-        if(isUpdated) {
+        if (isUpdated) {
             return Response.status(Response.Status.CREATED)
                     .build();
-        }
-        else {
+        } else {
             return Response.status(Response.Status.BAD_REQUEST)
                     .build();
         }
@@ -71,12 +79,11 @@ public class BookResource {
             return Response.status(Response.Status.BAD_REQUEST)
                     .build();
         }
-        if(isDeleted) {
+        if (isDeleted) {
             return Response.status(Response.Status.CREATED)
                     .entity("Deleted")
                     .build();
-        }
-        else {
+        } else {
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity("Bad request")
                     .build();
