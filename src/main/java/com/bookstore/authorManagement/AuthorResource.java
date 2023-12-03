@@ -1,4 +1,4 @@
-package com.bookstore.bookManagement;
+package com.bookstore.authorManagement;
 
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -7,23 +7,23 @@ import jakarta.ws.rs.core.Response;
 import java.sql.SQLException;
 import java.util.List;
 
-@Path("/books")
-public class BookResource {
-    public static BookDao bookDao = new BookDao();
+@Path("/authors")
+public class AuthorResource {
+    public static AuthorDao authorDao = new AuthorDao();
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Book> getAllBooks() {
-        return bookDao.getAllBooks();
+    public List<Author> getAllAuthors() {
+        return authorDao.getAllAuthors();
     }
 
     @Path("/{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Book getBookById(@PathParam("id") int id) {
+    public Author getAuthorById(@PathParam("id") int id) {
         try {
             //TODO return status OK.
-            return bookDao.getBookById(id);
+            return authorDao.getAuthorById(id);
         } catch (Exception e) {
             //TODO return status BAD_REQUEST.
             throw new RuntimeException(e);
@@ -32,8 +32,8 @@ public class BookResource {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response addBook(Book book) {
-        boolean isAdded = bookDao.addBook(book);
+    public Response addAuthor(Author author) {
+        boolean isAdded = authorDao.addAuthor(author);
         if(isAdded) {
             return Response.status(Response.Status.CREATED)
                     .build();
@@ -47,8 +47,8 @@ public class BookResource {
     @Path("/{id}")
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response updateBook(@PathParam("id") int id, Book updatedBook) {
-        boolean isUpdated = bookDao.updateBook(id, updatedBook);
+    public Response updateAuthor(@PathParam("id") int id, Author updatedAuthor) {
+        boolean isUpdated = authorDao.updateAuthor(id, updatedAuthor);
         if(isUpdated) {
             return Response.status(Response.Status.CREATED)
                     .build();
@@ -62,11 +62,11 @@ public class BookResource {
     @Path("/{id}")
     @DELETE
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response deleteBook(@PathParam("id") int id) {
+    public Response deleteAuthor(@PathParam("id") int id) {
 
         boolean isDeleted = false;
         try {
-            isDeleted = bookDao.deleteBook(id);
+            isDeleted = authorDao.deleteAuthor(id);
         } catch (SQLException e) {
             return Response.status(Response.Status.BAD_REQUEST)
                     .build();
