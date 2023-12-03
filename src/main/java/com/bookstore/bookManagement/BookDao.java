@@ -17,8 +17,8 @@ public class BookDao {
                     while (result.next()) {
                         Book book = new Book();
                         book.setId(result.getInt("id"));
+                        book.setAuthorId(result.getInt("author_id"));
                         book.setTitle(result.getString("title"));
-                        book.setAuthor(result.getString("author"));
                         book.setPrice(result.getDouble("price"));
                         book.setQuantity(result.getInt("quantity"));
                         books.add(book);
@@ -44,8 +44,8 @@ public class BookDao {
                     if (result.next()) {
                         Book book = new Book();
                         book.setId(result.getInt("id"));
+                        book.setAuthorId(result.getInt("author_id"));
                         book.setTitle(result.getString("title"));
-                        book.setAuthor(result.getString("author"));
                         book.setPrice(result.getDouble("price"));
                         book.setQuantity(result.getInt("quantity"));
 
@@ -64,11 +64,11 @@ public class BookDao {
 
     public boolean addBook(Book book) {
         try (Connection connection = DBConnection.getConnection()) {
-            String sql = "INSERT INTO Books (title, author, price, quantity) VALUES(?, ?, ?, ?)";
+            String sql = "INSERT INTO Books (author_id, title, price, quantity) VALUES(?, ?, ?, ?)";
 
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-                preparedStatement.setString(1, book.getTitle());
-                preparedStatement.setString(2, book.getAuthor());
+                preparedStatement.setInt(1, book.getAuthorId());
+                preparedStatement.setString(2, book.getTitle());
                 preparedStatement.setDouble(3, book.getPrice());
                 preparedStatement.setInt(4, book.getQuantity());
 
@@ -83,11 +83,11 @@ public class BookDao {
 
     public boolean updateBook(int id, Book book) {
         try (Connection connection = DBConnection.getConnection()) {
-            String sql = "UPDATE Books SET title = ?, author = ?, price = ?, quantity = ? WHERE id = ?";
+            String sql = "UPDATE Books SET  author_id = ?, title = ?, price = ?, quantity = ? WHERE id = ?";
 
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-                preparedStatement.setString(1, book.getTitle());
-                preparedStatement.setString(2, book.getAuthor());
+                preparedStatement.setInt(1, book.getAuthorId());
+                preparedStatement.setString(2, book.getTitle());
                 preparedStatement.setDouble(3, book.getPrice());
                 preparedStatement.setInt(4, book.getQuantity());
                 preparedStatement.setInt(5, id);
