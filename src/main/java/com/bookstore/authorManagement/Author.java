@@ -3,8 +3,15 @@ package com.bookstore.authorManagement;
 public class Author {
     private int id;
     private String name;
+    private String email;
 
     public Author() {
+    }
+
+    public Author(String name, String email) {
+        this.id = 0;
+        this.name = name;
+        this.email = email;
     }
 
     public int getId() {
@@ -23,11 +30,20 @@ public class Author {
         this.name = name;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public String toString() {
         return "Author{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
                 '}';
     }
 }
