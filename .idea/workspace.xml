@@ -5,9 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4dd3ae1b-0e81-403e-a720-b5622f8e199d" name="Changes" comment="change field author to author_id in Book class">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bookstore/userManagement/AddUserDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bookstore/userManagement/GetUserLoginPasswordDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bookstore/userManagement/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bookstore/userManagement/UserDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bookstore/userManagement/UserResource.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bookstore/userManagement/UserRole.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bookstore/bookManagement/BookDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bookstore/bookManagement/BookDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bookstore/bookManagement/BookResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bookstore/bookManagement/BookResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bookstore/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bookstore/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +22,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -38,7 +44,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "feature/use__query__parameters__to__filter__books",
+    "git-widget-placeholder": "feature/add__user__entity",
     "last_opened_file_path": "/Users/elenabezrodnova/IdeaProjects/BookStoreInventoryAPI/src/main/java/com/bookstore/authorManagement",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
@@ -46,6 +52,9 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.bookstore.userManagement" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/java/com/bookstore/authorManagement" />
     </key>
@@ -88,11 +97,6 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/bookstore/DBConnection.java</url>
-          <line>14</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/bookstore/bookManagement/BookDao.java</url>
           <line>187</line>
